@@ -1,10 +1,21 @@
-function gerarArte() {
-  const resultado = document.getElementById("resultado");
-  resultado.innerHTML = "<p>Gerando arte...</p>";
+const dino = document.getElementById("dino");
+const cacto = document.getElementById("cacto");
 
-  setTimeout(() => {
-    const random = Math.floor(Math.random() * 1000);
-    const url = `https://source.unsplash.com/random/800x600?sig=${random}&art`;
-    resultado.innerHTML = `<img src="${url}" alt="Arte gerada pela IA">`;
-  }, 1500);
-}
+document.addEventListener("keydown", () => {
+  if (!dino.classList.contains("pular")) {
+    dino.classList.add("pular");
+    setTimeout(() => {
+      dino.classList.remove("pular");
+    }, 500);
+  }
+});
+
+setInterval(() => {
+  const dinoTop = parseInt(window.getComputedStyle(dino).getPropertyValue("top"));
+  const cactoLeft = parseInt(window.getComputedStyle(cacto).getPropertyValue("left"));
+
+  if (cactoLeft < 90 && cactoLeft > 50 && dinoTop >= 140) {
+    alert("Game Over!");
+    location.reload();
+  }
+}, 10);
